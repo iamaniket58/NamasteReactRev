@@ -20,20 +20,15 @@ const Header = () => {
     )
 }
 const RestaurantCard = (props) => {
-    // console.log(props);
-
-    const { info } = props.resData;
-    // console.log(info);
+    const { name,cuisines, avgRatingString,costForTwo,sla,cloudinaryImageId} = props?.resData?.info;
     return (
         <div className="res-card">
-            {console.log(info.cloudinaryImageId)}
-            <img className="res-logo" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + info.cloudinaryImageId} alt={info.name} width="200px" />
-            <h3>{info?.name ?? "Restaurant name"}</h3>
-            {/* <h4> {props.cuisine ?? "jjj"}</h4> */}
-            <h4>{info.cuisines.join(",")}</h4>
-            <h4>{info.avgRatingString}</h4>
-            <h4>{info.costForTwo}</h4>
-            <h4>{info.sla.slaString}</h4>
+            <img className="res-logo" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + cloudinaryImageId} alt={name} width="200px" />
+            <h3>{name }</h3>
+            <h4>{cuisines.join(",")}</h4>
+            <h4>{avgRatingString}</h4>
+            <h4>{costForTwo}</h4>
+            <h4>{sla.slaString}</h4>
         </div>
     )
 }
@@ -812,14 +807,16 @@ let restaurantsList = [
 ]
 const Body = () => {
     return (
+       
         <div className="body">
             <div className="search">Search</div>
             <div className="res-container">
-                <RestaurantCard resData={restaurantsList[0]} />
+                {/* <RestaurantCard resData={restaurantsList[0]} />
                 <RestaurantCard resData={restaurantsList[1]} />
                 <RestaurantCard resData={restaurantsList[2]} />
                 <RestaurantCard resData={restaurantsList[3]} />
-                <RestaurantCard resData={restaurantsList[4]} />
+                <RestaurantCard resData={restaurantsList[4]} /> */}
+                {restaurantsList.map((restro)=><RestaurantCard key={restro.info.id} resData={restro} />)}
 
             </div>
         </div>
@@ -827,6 +824,7 @@ const Body = () => {
 }
 const AppLayout = () => {
     return (
+        
         <div className="app-layout">
             <Header />
             <Body />
