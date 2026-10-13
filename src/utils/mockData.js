@@ -1,40 +1,3 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import "./index.css"
-
-const Header = () => {
-    return (
-        <div className="header">
-            <div className="logo-container">
-                <img src="https://ts4.mm.bing.net/th?id=OIP.pmrlCtbaRdQCnwX_E4NHuQHaHa&pid=15.1" alt="logo" width="100px" />
-            </div>
-            <div className="nav-items">
-                <ul >
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    )
-}
-const RestaurantCard = (props) => {
-    const { name,cuisines, avgRatingString,costForTwo,sla,cloudinaryImageId} = props?.resData?.info;
-    return (
-        <div className="res-card">
-            <img className="res-logo" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + cloudinaryImageId} alt={name} width="200px" />
-            <h3>{name }</h3>
-            <h4>{cuisines.join(",")}</h4>
-            <h4>{avgRatingString}</h4>
-            <h4>{costForTwo}</h4>
-            <h4>{sla.slaString}</h4>
-        </div>
-    )
-}
-// const css={
-//     backgroundColor:"blue"
-// }
 let resObject = {
     "info": {
         "id": "375041",
@@ -805,31 +768,4 @@ let restaurantsList = [
         "widgetId": "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo"
     }
 ]
-const Body = () => {
-    return (
-       
-        <div className="body">
-            <div className="search">Search</div>
-            <div className="res-container">
-                {/* <RestaurantCard resData={restaurantsList[0]} />
-                <RestaurantCard resData={restaurantsList[1]} />
-                <RestaurantCard resData={restaurantsList[2]} />
-                <RestaurantCard resData={restaurantsList[3]} />
-                <RestaurantCard resData={restaurantsList[4]} /> */}
-                {restaurantsList.map((restro)=><RestaurantCard key={restro.info.id} resData={restro} />)}
-
-            </div>
-        </div>
-    )
-}
-const AppLayout = () => {
-    return (
-        
-        <div className="app-layout">
-            <Header />
-            <Body />
-        </div>
-    )
-}
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AppLayout />)
+export default restaurantsList;
