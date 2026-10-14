@@ -17,10 +17,8 @@ const Body = () => {
         let restaurantData=json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
         setRestroList(restaurantData);
     }
-    if(restroList.length==0){
-        return <Shimmer/>
-    }
-    return (
+
+    return restroList.length==0?<Shimmer/>:(
 
         <div className="body">
             <div className="filter">
