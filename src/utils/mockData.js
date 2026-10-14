@@ -96,7 +96,7 @@ let restaurantsList = [
         "@type": "type.googleapis.com/swiggy.presentation.food.v2.Restaurant",
         "info": {
             "id": "23678",
-            "name": "McDonald's",
+            "name": "McDonald'ssssssss",
             "cloudinaryImageId": "RX_THUMBNAIL/IMAGES/VENDOR/2026/6/18/51a609f3-8277-441c-9dbe-545edab886c9_23678.JPG",
             "locality": "5th Block",
             "areaName": "Koramangala",

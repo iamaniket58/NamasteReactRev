@@ -9,6 +9,7 @@ const AppLayout = () => {
     return (
         
         <div className="app-layout">
+            {console.log('App Layout is getting rendered')}
             <Header />
             <Body />
         </div>
