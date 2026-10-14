@@ -65,3 +65,9 @@
     background-color: #f0f0f0;
     cursor: pointer;
 }
+.filter{
+    display: flex;
+}
+.search-filter{
+    margin:10px;
+}

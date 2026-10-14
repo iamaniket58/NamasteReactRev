@@ -6,22 +6,33 @@ const Body = () => {
     let arr = useState([]);
     console.log('Arr', arr);
     let [restroList, setRestroList] = arr;
+    let [searchText,setSearchText]=useState("");
     useEffect(() => {
         let data = fetchData();
         // console.log(data);
     }, [])
 
     const fetchData = async function () {
+        console.log("HEYYEYEYEYEYEYEYEYEY")
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-        let json= await data.json();
-        let restaurantData=json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        let json = await data.json();
+        let restaurantData = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
         setRestroList(restaurantData);
     }
 
-    return restroList.length==0?<Shimmer/>:(
+    return restroList.length == 0 ? <Shimmer /> : (
 
         <div className="body">
+            
+
             <div className="filter">
+                <div className="search-filter">
+                <input type="text" className="search-box" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}></input>
+                <button onClick={()=>{
+                    setRestroList(restroList.filter(res=>{return res.info.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())}))
+
+                }}>Search</button>
+            </div>
                 <button className="filter-btn" onClick={() => {
 
                     let restroList1 = restroList.filter(res => +(res.info.avgRating) > 4.2)
