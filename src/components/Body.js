@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import restaurantsList from "../utils/mockData";
+import { SWIGGY_FETCH_RESTRO_KORAMANGALA } from "../utils/constants";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer"
 const Body = () => {
@@ -10,11 +11,11 @@ const Body = () => {
     useEffect(() => {
         let data = fetchData();
         // console.log(data);
-    }, [])
+    }, [searchText])
 
     const fetchData = async function () {
-        console.log("HEYYEYEYEYEYEYEYEYEY")
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        console.log("API is getting called")
+        const data = await fetch(SWIGGY_FETCH_RESTRO_KORAMANGALA);
         let json = await data.json();
         let restaurantData = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
         setRestroList(restaurantData);
