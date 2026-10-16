@@ -2,12 +2,13 @@ import RestaurantCard from "./RestaurantCard";
 import restaurantsList from "../utils/mockData";
 import { SWIGGY_FETCH_RESTRO_KORAMANGALA } from "../utils/constants";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer"
 const Body = () => {
     let [restroList, setRestroList] = useState([]);
     let [filteredRestroList, setFilteredRestroList] = useState([]);
 
-    let [searchText,setSearchText]=useState("");
+    let [searchText, setSearchText] = useState("");
     useEffect(() => {
         let data = fetchData();
         // console.log(data);
@@ -25,16 +26,16 @@ const Body = () => {
     return restroList.length == 0 ? <Shimmer /> : (
 
         <div className="body">
-            
+
 
             <div className="filter">
                 <div className="search-filter">
-                <input type="text" className="search-box" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}></input>
-                <button onClick={()=>{
-                    setFilteredRestroList(restroList.filter(res=>{return res.info.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())}))
+                    <input type="text" className="search-box" value={searchText} onChange={(e) => { setSearchText(e.target.value) }}></input>
+                    <button onClick={() => {
+                        setFilteredRestroList(restroList.filter(res => { return res.info.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) }))
 
-                }}>Search</button>
-            </div>
+                    }}>Search</button>
+                </div>
                 <button className="filter-btn" onClick={() => {
 
                     let restroList1 = restroList.filter(res => +(res.info.avgRating) > 4.2)
@@ -50,7 +51,9 @@ const Body = () => {
                 <RestaurantCard resData={restaurantsList[3]} />
                 <RestaurantCard resData={restaurantsList[4]} /> */}
                 {console.log('Body is getting rendered')}
-                {filteredRestroList.map((restro) => <RestaurantCard key={restro.info.id} resData={restro} />)}
+                {filteredRestroList.map((restro) =>
+                    <Link to={"/restaurants/" + restro.info.id} key={restro.info.id}>  <RestaurantCard resData={restro} /></Link>
+                )}
 
 
             </div>
