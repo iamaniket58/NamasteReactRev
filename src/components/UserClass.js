@@ -5,19 +5,31 @@ class UserClass extends React.Component {
         super(props);
         console.log(this.props)
         this.state={
-            count:0
+            count:0,
+            userInfo:{}
         }
         
     }
+    async componentDidMount(){
+        let data=await fetch('https://api.github.com/users/iamaniket58');
+        let json=await data.json();
+        this.setState({
+            userInfo:json
+        })
+    }
+    
     render() {
-        let {name,location}=this.props;
+        if(this.state.userInfo=={})return <Shimmer/>
+        // let {name,location}=this.props;
         let {count}=this.state;
+        let {name,location,avatar_url,login}=this.state.userInfo;
         return (
             <div className="user-card">
             <h1>Count is {count}</h1>
+            <img src={avatar_url}/>
             <h2>Name: {name}</h2>
             <h3>location: {location}</h3>
-            <h4>Contact: @Aniket58</h4>
+            <h4>Contact: {login}</h4>
             <button onClick={() => {
                 this.setState({
                     count:count+1
