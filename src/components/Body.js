@@ -4,6 +4,7 @@ import { SWIGGY_FETCH_RESTRO_KORAMANGALA } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer"
+import useOnlineStatus from "../utils/useOnlineStatus"
 const Body = () => {
     let [restroList, setRestroList] = useState([]);
     let [filteredRestroList, setFilteredRestroList] = useState([]);
@@ -22,7 +23,14 @@ const Body = () => {
         setRestroList(restaurantData);
         setFilteredRestroList(restaurantData);
     }
-
+    const onlineStatus=useOnlineStatus();
+    if(!onlineStatus){
+        return(
+            <div>
+                Looks like you are offline. Please check your internet connection;
+            </div>
+        )
+    }
     return restroList.length == 0 ? <Shimmer /> : (
 
         <div className="body">
